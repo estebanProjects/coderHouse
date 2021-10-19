@@ -144,7 +144,7 @@ async function ejecutarPrograma() {
 ejecutarPrograma()
 
 app.get('/', (req, res) => {
-  res.send("<h1 style='color:blue'> Welcome :D!</h1>")    
+  res.send("<h1 style='color:blue'> Welcome :D!</h1><br/><h2 style='color:aqua'>Prueba entrando en /productos y /productoRandom</h2>")      
 })
 
 app.get('/productos', (req, res) => {
