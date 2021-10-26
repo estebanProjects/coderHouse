@@ -1,11 +1,10 @@
 const express = require('express')
+const fs = require('fs')
 
 const app = express()
 const port = process.env.PORT || 8080
 
 // PROYECT-
-
-const fs = require("fs");
 
 const writeFileAsync = async (arr, nameFile) => {
   await fs.promises.writeFile(
@@ -141,7 +140,7 @@ async function ejecutarPrograma() {
    // await contenedor.deleteAll() 
 }
   
-ejecutarPrograma()
+// ejecutarPrograma()
 
 app.get('/', (req, res) => {
   res.send("<h1 style='color:blue'> Welcome :D!</h1><br/><h2 style='color:aqua'>Prueba entrando en /productos y /productoRandom</h2>")      
