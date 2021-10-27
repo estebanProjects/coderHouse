@@ -86,10 +86,6 @@ async function ejecutarPrograma() {
 // ejecutarPrograma()
 
 // Metodos Get
-app.get('/', (req, res) => {
-  res.send("<h1 style='color:blue'> Welcome :D!</h1><br/><h2 style='color:aqua'>Prueba entrando en /productos y /productoRandom</h2>")      
-})
-
 app.get('/productoRandom', async (req, res) => {
       let allData = await readFileAsync(contenedor.nameFile)
       allData = JSON.parse(allData)
@@ -97,6 +93,10 @@ app.get('/productoRandom', async (req, res) => {
       let productChosen = allData[numRandom]
 
       res.send(productChosen)    
+})
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + "/public/index.html")
 })
 
 app.get('/form', (req, res) => {
