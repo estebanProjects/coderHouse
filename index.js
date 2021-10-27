@@ -1,8 +1,20 @@
 const express = require('express')
+const path = require('path')
 const fs = require('fs')
+
 
 const app = express()
 const port = process.env.PORT || 8080
+
+const publicPath = path.join(__dirname, 'public')
+app.use(express.static(publicPath))
+
+const productRoutes = require('./productos')
+
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
+app.use("/api", productRoutes)
 
 // PROYECT-
 
@@ -63,7 +75,7 @@ class Contenedor {
           return dataFile[i]
         }
       }
-      return console.log(null + " :id no encontrado")
+      return {error: "Producto no encontrado"}
     }
   }
 
@@ -99,8 +111,8 @@ class Contenedor {
 
 // PROYECT-
 
-
 let contenedor = new Contenedor("./productos.txt");
+
 
 // llama a todos los metodos de Contenedor
 async function ejecutarPrograma() {
@@ -142,31 +154,32 @@ async function ejecutarPrograma() {
   
 // ejecutarPrograma()
 
+// Metodos Get
 app.get('/', (req, res) => {
   res.send("<h1 style='color:blue'> Welcome :D!</h1><br/><h2 style='color:aqua'>Prueba entrando en /productos y /productoRandom</h2>")      
 })
 
-app.get('/productos', (req, res) => {
-  async function ejecutar() {
-      let allProducts = await contenedor.getAll()
-
-      res.send(allProducts)    
-  }
-  ejecutar()
-})
-
-app.get('/productoRandom', (req, res) => {
-  async function ejecutar() {
+app.get('/productoRandom', async (req, res) => {
       let allData = await readFileAsync(contenedor.nameFile)
       allData = JSON.parse(allData)
       let numRandom = Math.floor(Math.random()*allData.length)
       let productChosen = allData[numRandom]
 
       res.send(productChosen)    
-  }
-  ejecutar()
 })
 
+app.get('/form', (req, res) => {
+  res.sendFile(__dirname+"/public/form.html")
+})
+
+app.post("/", async (req, res) => {
+  req.body.price = Number(req.body.price)                                                                                                                                                                      
+    await contenedor.save(req.body)  
+    console.log(req.body)
+    res.send("Informacion enviada")
+})
+
+module.exports.contenedor = contenedor
 
 
 app.listen(port, () => {
