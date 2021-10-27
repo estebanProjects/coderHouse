@@ -1,5 +1,4 @@
 const express = require('express')
-const fs = require('fs')
 const app = express()
 
 // app.use(bodyParser.json());
@@ -10,13 +9,13 @@ const inde = require('./index')
 
 const { Router } = express
 
-const writeFileAsync = async (arr, nameFile) => {
-    await fs.promises.writeFile(
-      nameFile,
-      JSON.stringify(arr, null, 2),
-      "utf-8"
-    );
-  }; 
+// const writeFileAsync = async (arr, nameFile) => {
+//     await fs.promises.writeFile(
+//       nameFile,
+//       JSON.stringify(arr, null, 2),
+//       "utf-8"
+//     );
+//   }; 
 
 const router = new Router()
 
@@ -46,7 +45,8 @@ router.put('/productos/:id', async (req, res) => {
     datos[index].title = req.body.title
     datos[index].price = req.body.price
     datos[index].thumbnail = req.body.thumbnail
-    writeFileAsync(datos, inde.contenedor.nameFile)
+    
+    inde.writeFileAsync(datos, inde.contenedor.nameFile)
     
     res.send("Producto actualizado!")
 })
