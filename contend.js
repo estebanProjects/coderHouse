@@ -46,6 +46,10 @@ class Contenedor {
       if(datos) {
         let dataFile = JSON.parse(datos)
         return dataFile
+      } else {
+        console.log('as')
+        let vacio = []
+        return vacio
       }
     }
   

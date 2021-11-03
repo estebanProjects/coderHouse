@@ -9,19 +9,15 @@ const inde = require('./index')
 
 const { Router } = express
 
-// const writeFileAsync = async (arr, nameFile) => {
-//     await fs.promises.writeFile(
-//       nameFile,
-//       JSON.stringify(arr, null, 2),
-//       "utf-8"
-//     );
-//   }; 
 
 const router = new Router()
 
 // GET
 router.get('/productos', async (req, res) => {
-    res.send(await inde.contenedor.getAll())    
+    let productos = await inde.contenedor.getAll() 
+    console.log(productos)
+    res.render('productosAll', {productos})
+    // res.send(await inde.contenedor.getAll())    
 })
 
 router.get('/productos/:id', async (req, res) => {

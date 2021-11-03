@@ -13,6 +13,10 @@ const productRoutes = require('./productos')
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs")
+// app.set("views", "./views")
+
 const container = require('./contend')
 
 // Middleware
@@ -95,19 +99,19 @@ app.get('/productoRandom', async (req, res) => {
       res.send(productChosen)    
 })
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + "/public/index.html")
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + "/public/index.html")
+// })
 
-app.get('/form', (req, res) => {
-  res.sendFile(__dirname+"/public/form.html")
+app.get('/', (req, res) => {
+  res.sendFile(__dirname+"/public/index.html")
 })
 
 app.post("/", async (req, res) => {
   req.body.price = Number(req.body.price)                                                                                                                                                                      
     await contenedor.save(req.body)  
     console.log(req.body)
-    res.send("Informacion enviada")
+    res.sendFile(__dirname + "/public/post.html")
 })
 
 module.exports.contenedor = contenedor

@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos Aplicacion</title>
+    <title>Formulario de Productos</title> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Bienvenido a esta página :D</h1>
+    <form action="/" method="post">
+        <label for="">Nombre del producto</label>
+        <input type="text" name="title" class="input_t" value="libro">
 
-    <div>
-        <p>¿Quiere ver todos los productos? Presione <a href="/api/productos">aquí</a></p>
-        <p>¿Quiere ver un producto random? Presione <a href="/productoRandom">aquí</a></p>
-        <p>Para entrar al formulario de productos presione <a href="/form">aquí</a> </p>
-        <p>Para ver a un producto por su id escriba en la url /api/productos/ y el id que desee, por ejemplo para ver el producto con el id 1 presione <a href="/api/productos/1">aquí</a></p>
-        <p>Para ver las demás funcionalidades usar Postman(metodo post, put y delete)</p>
-    </div>
+        <label for="">Precio</label>
+        <input type="text" name="price" class="input_t" value="150.73">
+
+        <label for="">Link de la imagen</label>
+        <input type="text" name="thumbnail" class="input_t" value="https://cdn2.iconfinder.com/data/icons/flat-seo-web-ikooni/128/flat_seo2-04-512.png">
+
+        <input type="submit" value="Enviar" class="input_btn">
+    </form>
+
+    <a href="/api/productos">Ver todos los productos</a>
     
 </body>
 </html>
